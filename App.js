@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 
 function App() {
   const [language, setLanguage] = useState('English');
