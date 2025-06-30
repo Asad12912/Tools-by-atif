@@ -8,19 +8,17 @@ function App() {
   const [account, setAccount] = useState('Main');
   const [status, setStatus] = useState('');
 
-  const handleFileUpload = (e) => {
-    setPhoto(e.target.files[0]);
-  };
+  const handleFileUpload = (e) => setPhoto(e.target.files[0]);
 
   const generateVideoFromAI = async () => {
     setStatus('Generating video via Google AI Pro...');
-    await new Promise((res) => setTimeout(res, 3000));
-    return `https://fakevideolink.com/generated_video.mp4`;
+    await new Promise(res => setTimeout(res, 3000));
+    return 'https://fakevideolink.com/generated_video.mp4';
   };
 
   const uploadToTikTok = async (videoUrl, topicText) => {
     setStatus('Uploading video to TikTok...');
-    await new Promise((res) => setTimeout(res, 2000));
+    await new Promise(res => setTimeout(res, 2000));
     return true;
   };
 
@@ -36,25 +34,19 @@ function App() {
     const hashtags = generateHashtags(topic);
     const videoUrl = await generateVideoFromAI();
     const uploaded = await uploadToTikTok(videoUrl, topic);
-    if (uploaded) {
-      setStatus(`✅ Video uploaded with hashtags: ${hashtags}`);
-    } else {
-      setStatus('❌ Failed to upload video.');
-    }
+    setStatus(uploaded ? `✅ Video uploaded with hashtags: ${hashtags}` : '❌ Failed to upload video.');
   };
 
   return (
-    <div className="App">
+    <div>
       <h1>TOOLS BY ATIF</h1>
-      <label>
-        Language:
-        <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-          <option>English</option>
-          <option>اردو</option>
-          <option>Arabic</option>
-          <option>Punjabi</option>
-        </select>
-      </label>
+      <label>Language:</label>
+      <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+        <option>English</option>
+        <option>اردو</option>
+        <option>Arabic</option>
+        <option>Punjabi</option>
+      </select>
 
       <main>
         <div className="input-section">
@@ -65,7 +57,6 @@ function App() {
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
           />
-
           <label className="add-photo">
             + Add Photo
             <input type="file" accept="image/*" onChange={handleFileUpload} hidden />
